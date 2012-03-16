@@ -3,6 +3,7 @@ Inspired by: http://ravikiranj.net/drupal/201106/code/javascript/how-implement-i
 
 - No dependencies
 - Tested in Chrome 17, IE7, Firefox 11, Android 2.3 Browser, iPad 2 with IOS5
+- Handles touch events to respond before the end of the user's scroll on devices like the iPad
 
 ## Usage
 ``` js
