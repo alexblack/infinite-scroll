@@ -24,22 +24,36 @@
     window.onscroll = function(event) {
       handleScroll(scroller, event);
     }
+    // For touch devices, try to detect scrolling by touching
+    document.ontouchmove = function(event) {
+      handleScroll(scroller, event);
+    }
   }
   
+  function getScrollPos() {
+    // Handle scroll position in case of IE differently
+    if (isIE) {
+      return document.documentElement.scrollTop;
+    } else {
+      return window.pageYOffset;
+    }
+  }
+  
+  var prevScrollPos = getScrollPos();
+  
+  // Respond to scroll events
   function handleScroll(scroller, event) {
-    var scrollPos;
     if (scroller.updateInitiated) {
       return;
     }   
+    var scrollPos = getScrollPos();
+    if (scrollPos == prevScrollPos) {
+      return; // nothing to do
+    }
+    
     // Find the pageHeight and clientHeight(the no. of pixels to scroll to make the scrollbar reach max pos)
     var pageHeight = document.documentElement.scrollHeight;
     var clientHeight = document.documentElement.clientHeight;
-    // Handle scroll position in case of IE differently
-    if (isIE) {
-      scrollPos = document.documentElement.scrollTop;
-    } else {
-      scrollPos = window.pageYOffset;
-    }
     
     // Check if scroll bar position is just 50px above the max, if yes, initiate an update
     if (pageHeight - (scrollPos + clientHeight) < scroller.options.distance) {
@@ -48,6 +62,8 @@
       scroller.options.callback(function() {
         scroller.updateInitiated = false;
       });
-    }  
+    }
+    
+    prevScrollPos = scrollPos;  
   }
 }());
