@@ -1,5 +1,6 @@
 # Infinite-Scroll
 Inspired by: http://ravikiranj.net/drupal/201106/code/javascript/how-implement-infinite-scrolling-using-native-javascript-and-yui3
+
 - No dependencies
 - Tested in Chrome 17, IE7, Firefox 11, Android 2.3 Browser, iPad 2 with IOS5
 
